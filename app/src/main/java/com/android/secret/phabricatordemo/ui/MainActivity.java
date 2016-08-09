@@ -15,18 +15,15 @@ import com.android.secret.phabricatordemo.A;
 import com.android.secret.phabricatordemo.Fix;
 import com.android.secret.phabricatordemo.R;
 import com.android.secret.phabricatordemo.ViewPagerAdapter;
-
-import java.io.File;
-import java.io.IOException;
+import com.android.secret.phabricatordemo.util.PatchUtil;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "TAG";
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
     private int times = 0;
-    private com.alipay.euler.andfix.patch.PatchManager mPatchManager;
-    private static final String APATCH_PATH = "/out.apatch";
+    private PatchUtil patchUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.setAdapter(mViewPagerAdapter);
 
-        mPatchManager = new PatchManager(this);
-
-        Log.e(TAG, A.a("good"));
-        Log.e(TAG, "" + new A().b("s1", "s2"));
-        Log.e(TAG, "" + new A().getI());
+        patchUtil = PatchUtil.getInstance(getApplication());
 
     }
 
@@ -72,30 +65,9 @@ public class MainActivity extends AppCompatActivity {
 //                stopService(intent);
 //            }
 //            times++;
-
-            // add patch at runtime
-            // load patch
-//            mPatchManager.loadPatch();
-            String patchFileString = Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + APATCH_PATH;
-            Log.d("TAG", "apatch:" + patchFileString + " added.");
-//            Toast.makeText(MainActivity.this, patchFileString, Toast.LENGTH_LONG).show();
-            try {
-                // .apatch file path
-//                Toast.makeText(MainActivity.this, patchFileString, Toast.LENGTH_SHORT).show();
-                mPatchManager.addPatch(patchFileString);
-
-                //add successfully and delete .apatch file in sdcard
-                File file = new File(patchFileString);
-                if (file.exists()) {
-                    file.delete();
-                }
-
-            } catch (IOException e) {
-                Log.e("TAG", "", e);
-                Toast.makeText(MainActivity.this, "e: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-            Toast.makeText(MainActivity.this, Fix.a("good"), Toast.LENGTH_SHORT).show();
+            patchUtil.loadPatch();
+            patchUtil.addPatch();
+            Toast.makeText(this, Fix.a("good"), Toast.LENGTH_LONG).show();
             return true;
         }
 

@@ -5,6 +5,10 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.alipay.euler.andfix.patch.PatchManager;
+import com.android.secret.phabricatordemo.util.PatchUtil;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by secret on 16/8/8.
@@ -12,21 +16,15 @@ import com.alipay.euler.andfix.patch.PatchManager;
 public class MainApplication extends Application {
     private static final String TAG = "euler";
 
-    private static final String APATCH_PATH = "/out.apatch";
-    /**
-     * patch manager
-     */
-    private PatchManager mPatchManager;
+    private PatchUtil patchUtil;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        // initialize
-        mPatchManager = new PatchManager(this);
-        mPatchManager.init("1.0");
-        Log.d(TAG, "inited.");
 
-        mPatchManager.loadPatch();
-
+        patchUtil = PatchUtil.getInstance(this);
+        patchUtil.loadPatch();
+        patchUtil.addPatch();
     }
+
 }
