@@ -16,7 +16,9 @@ import com.android.secret.phabricatordemo.Fix;
 import com.android.secret.phabricatordemo.R;
 import com.android.secret.phabricatordemo.ViewPagerAdapter;
 import com.android.secret.phabricatordemo.util.PatchUtil;
-
+/**
+* hhah
+*/
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "TAG";
