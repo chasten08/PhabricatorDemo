@@ -27,6 +27,8 @@ public class MainService extends Service {
     public void onCreate() {
         super.onCreate();
         timer = new Timer();
+
+        // 添加一行注释，这行注释可以删掉, 搞定了
     }
 
     @Nullable
