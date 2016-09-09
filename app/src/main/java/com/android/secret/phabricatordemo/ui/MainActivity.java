@@ -58,13 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            Intent intent = new Intent(this, MainService.class);
-//            if (times % 2 == 0) {
-//                startService(intent);
-//            } else {
-//                stopService(intent);
-//            }
-//            times++;
             patchUtil.loadPatch();
             patchUtil.addPatch();
             Toast.makeText(this, Fix.a("good"), Toast.LENGTH_LONG).show();
